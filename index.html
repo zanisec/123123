@@ -1,22 +1,4 @@
-<?php
-// Iniciar sesión
-session_start();
 
-// Definir la contraseña
-$password = "mi_contraseña_segura"; // Cambia esto por tu contraseña
-
-// Verificar si ya se ha introducido la contraseña
-if (isset($_POST['password'])) {
-    if ($_POST['password'] === $password) {
-        $_SESSION['authenticated'] = true;
-    } else {
-        $error = "Contraseña incorrecta";
-    }
-}
-
-// Si no está autenticado, mostrar el formulario de contraseña
-if (!isset($_SESSION['authenticated'])) {
-?>
 
 <!DOCTYPE html>
 <html lang="es">
