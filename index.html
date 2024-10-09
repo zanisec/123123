@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Restringido</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #007bff, #6610f2);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        audio {
+            width: 80%;
+            max-width: 400px;
+            outline: none;
+        }
+        input[type="password"], input[type="submit"] {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1.1em;
+        }
+        input[type="password"] {
+            width: 80%;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="login-container">
+        <h1>Acceso a la Transmisión</h1>
+        <p>Introduce la contraseña para acceder:</p>
+        <form onsubmit="return checkPassword()">
+            <input type="password" id="password-input" placeholder="Contraseña">
+            <input type="submit" value="Ingresar">
+        </form>
+        <p id="error-message" style="color: red; display: none;">Contraseña incorrecta, inténtalo de nuevo.</p>
+    </div>
+
+    <div class="container" id="stream-container" style="display: none;">
+        <h1>Transmisión en Vivo</h1>
+        <p>Haz clic en el reproductor para escuchar el audio en vivo.</p>
+        <audio controls>
+            <source src="http://80.103.169.215:8000/stream" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <script>
+        // Contraseña para acceder a la página
+        const correctPassword = "maderos"; // Cambia esta contraseña
+
+        // Función para verificar la contraseña
+        function checkPassword() {
+            const inputPassword = document.getElementById("password-input").value;
+
+            if (inputPassword === correctPassword) {
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("stream-container").style.display = "block";
+            } else {
+                document.getElementById("error-message").style.display = "block";
+            }
+
+            return false; // Prevenir que el formulario se envíe
+        }
+    </script>
+
+</body>
+</html>
